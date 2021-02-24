@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 
-import { User } from './user.model';
-import { CreateUserDto, UpdateUserDto } from './user.model.dto';
+import { User } from './model';
+import { CreateUserDto, UpdateUserDto } from './model.dto';
 
 @Injectable()
 export class UserModelService {
@@ -24,10 +24,6 @@ export class UserModelService {
     const ret = await this.userModel.updateOne({ id }, updateUserDto);
     // 확인해야지
 
-    console.log(ret);
-    /**
-     *
-     */
     if (ret.ok) return true;
     return false;
   }

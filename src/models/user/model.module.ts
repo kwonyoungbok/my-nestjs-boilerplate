@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypegooseModule } from 'nestjs-typegoose';
 
-import { UserModelService } from './user.model.service';
-import { User } from './user.model';
+import { UserModelService } from './model.service';
+import { User } from './model';
 
 @Module({
   imports: [TypegooseModule.forFeature([User])],
