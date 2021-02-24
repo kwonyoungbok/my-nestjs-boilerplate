@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AppConfigService } from './config/app/config.service';
 import { S3ConfigService } from './config/s3/config.service';
-
+import { MongoConfigService } from './config/database/config.service';
 // https://medium.com/the-crowdlinker-chronicle/best-way-to-structure-your-directory-code-nestjs-a06c7a641401
 
 async function bootstrap() {
@@ -19,9 +19,11 @@ async function bootstrap() {
   );
   const appConfig: AppConfigService = app.get('AppConfigService');
   const s3Config: S3ConfigService = app.get('S3ConfigService');
+  const dbConfig: MongoConfigService = app.get('MongoConfigService');
 
   console.log(appConfig.port);
   console.log(s3Config.accessKey);
+  console.log(dbConfig.uri);
   await app.listen(3000);
 }
 bootstrap();
