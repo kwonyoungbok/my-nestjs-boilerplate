@@ -15,13 +15,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot({
       load: [configuration],
+      isGlobal: true,
       validationSchema: Joi.object({
-        APP_ENV: Joi.string()
-          .valid('development', 'production', 'test', 'provision')
-          .default('development'),
+        APP_ENV: Joi.string().valid('dev', 'prod', 'test').default('dev'),
         APP_PORT: Joi.number().default(4001),
-        // APP_NAME: Joi.string().default('MyApp'),
-        // APP_URL: Joi.string().default('http://my-app.test'),
       }),
     }),
   ],
