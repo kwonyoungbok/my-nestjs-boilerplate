@@ -10,6 +10,7 @@ import { MongoConfigService } from './config/database/config.service';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // pipe 라인도 모듈화 시켜야함..
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -17,13 +18,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  const appConfig: AppConfigService = app.get('AppConfigService');
-  const s3Config: S3ConfigService = app.get('S3ConfigService');
-  const dbConfig: MongoConfigService = app.get('MongoConfigService');
 
-  console.log(appConfig.port);
-  console.log(s3Config.accessKey);
-  console.log(dbConfig.uri);
-  await app.listen(3000);
+  const appConfig: AppConfigService = app.get('AppConfigService');
+  await app.listen(appConfig.port);
 }
 bootstrap();

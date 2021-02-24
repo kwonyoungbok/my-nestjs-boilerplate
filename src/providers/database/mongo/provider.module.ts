@@ -3,14 +3,7 @@ import { TypegooseModule, TypegooseModuleOptions } from 'nestjs-typegoose';
 
 import { MongoConfigService } from '@src/config/database/config.service';
 import { MongoConfigModule } from '@src/config/database/config.module';
-
-async function useFactory(
-  config: MongoConfigService,
-): Promise<TypegooseModuleOptions> {
-  return {
-    uri: config.uri,
-  };
-}
+import { TypegooseConfigService } from './provider.service';
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
@@ -18,9 +11,9 @@ async function useFactory(
   imports: [
     TypegooseModule.forRootAsync({
       imports: [MongoConfigModule],
-      useFactory,
-      inject: [MongoConfigService],
+      useClass: TypegooseConfigService,
     }),
   ],
+  providers: [MongoConfigService, TypegooseConfigService],
 })
 export class TypegoosePrividerModule {}

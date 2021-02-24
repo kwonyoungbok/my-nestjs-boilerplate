@@ -1,13 +1,14 @@
 import * as Joi from '@hapi/joi';
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+
 import configuration from './config';
 import { MongoConfigService } from './config.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true,
+      //  isGlobal: true,
       envFilePath: `.env.${process.env.APP_ENV}`,
       load: [configuration],
       validationSchema: Joi.object({
